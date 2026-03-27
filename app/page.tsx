@@ -16,23 +16,23 @@ export default function Home() {
       {/* Editorial Section 1 - Split Layout */}
       <EditorialSection
         layout="split"
-        category="Аксессуары"
-        title="Искусство Путешествий"
-        description="От классических чемоданов до современных дорожных сумок — откройте для себя багаж, созданный для взыскательных путешественников. Каждое изделие воплощает более чем вековой опыт в искусстве путешествий."
-        ctaText="Смотреть Travel"
+        category="Мужская коллекция"
+        title="Городской Стиль"
+        description="Откройте для себя коллекцию аксессуаров для современного мужчины. Рюкзаки, сумки и аксессуары, сочетающие практичность с безупречным стилем."
+        ctaText="Смотреть коллекцию"
         ctaLink="#"
-        image="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1200&auto=format&fit=crop"
+        image="/images/men-collection.jpg"
       />
 
       {/* Editorial Section 2 - Full Width */}
       <EditorialSection
         layout="full"
-        category="Лето 2024"
-        title="Морской Бриз"
+        category="Весна-Лето 2026"
+        title="Новая Эра Элегантности"
         description="Коллекция, вдохновлённая бескрайним горизонтом и нежным прикосновением морского ветра."
-        ctaText="Смотреть коллекцию"
+        ctaText="Коллекция 2026"
         ctaLink="#"
-        image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop"
+        image="/images/hero-woman.jpg"
       />
 
       {/* Product Grid */}

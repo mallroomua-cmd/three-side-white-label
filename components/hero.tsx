@@ -17,7 +17,7 @@ export function Hero() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2000&auto=format&fit=crop')",
+            "url('/images/hero-woman.jpg')",
         }}
       >
         {/* Gradient Overlay */}
@@ -36,16 +36,8 @@ export function Hero() {
           </span>
         </div>
 
-        <h1
-          className={`font-serif text-5xl sm:text-6xl lg:text-8xl text-white mt-4 tracking-[0.05em] transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          Морской Бриз
-        </h1>
-
         <div
-          className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mt-8 transition-all duration-1000 delay-700 ${
+          className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mt-6 transition-all duration-1000 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -66,6 +58,16 @@ export function Hero() {
             <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>
         </div>
+
+        <Link
+          href="#"
+          className={`mt-8 px-8 py-3 border border-white text-white tracking-[0.2em] text-xs font-light uppercase hover:bg-white hover:text-foreground transition-all duration-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: "700ms" }}
+        >
+          Коллекция 2026
+        </Link>
       </div>
 
       {/* Scroll Indicator */}
