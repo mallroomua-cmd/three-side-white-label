@@ -18,8 +18,8 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'MAISON ÉLÉGANCE | Luxury Fashion House',
-  description: 'Discover the world of Maison Élégance. Explore our collections of luxury bags, ready-to-wear, perfumes, and jewelry.',
+  title: 'THREE SIDE | Luxury Fashion House',
+  description: 'Discover the world of THREE SIDE. Explore our collections of luxury bags, ready-to-wear, perfumes, and jewelry.',
   generator: 'v0.app',
   icons: {
     icon: [

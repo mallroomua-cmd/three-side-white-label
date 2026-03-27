@@ -145,12 +145,12 @@ export function Footer() {
               href="/"
               className="font-serif text-2xl lg:text-3xl tracking-[0.2em] uppercase text-white"
             >
-              Maison Élégance
+              THREE SIDE
             </Link>
             
             {/* Copyright */}
             <p className="text-[11px] font-light text-white/40 tracking-wide">
-              © {new Date().getFullYear()} Maison Élégance. All rights reserved.
+              © {new Date().getFullYear()} THREE SIDE. All rights reserved.
             </p>
           </div>
         </div>

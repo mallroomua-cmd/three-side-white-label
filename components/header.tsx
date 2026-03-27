@@ -62,7 +62,7 @@ export function Header() {
             isScrolled ? "text-foreground" : "text-white"
           }`}
         >
-          Maison Élégance
+          THREE SIDE
         </Link>
 
         {/* Right - Icons */}

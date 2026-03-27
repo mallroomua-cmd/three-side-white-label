@@ -78,7 +78,7 @@ export function MonogramStrip() {
             </svg>
             {/* ME Letters */}
             <span className="font-serif text-2xl text-accent/30 tracking-[0.3em]">
-              MÉ
+              TS
             </span>
           </div>
         ))}
