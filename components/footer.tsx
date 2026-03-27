@@ -1,158 +1,165 @@
 "use client"
 
 import Link from "next/link"
-import { Instagram, Facebook, Twitter, Youtube } from "lucide-react"
+import { Instagram, Facebook, Youtube, MapPin, Phone, Mail } from "lucide-react"
 import { useState } from "react"
 
-const customerServiceLinks = [
-  "Связаться с нами",
-  "Частые вопросы",
-  "Доставка",
-  "Возврат и обмен",
-  "Уход за изделиями",
-  "Найти магазин",
-]
-
-const legalLinks = [
-  "Условия использования",
-  "Политика конфиденциальности",
-  "Политика Cookie",
-  "Доступность",
-]
+const footerLinks = {
+  help: {
+    title: "Помощь",
+    links: [
+      "Часто задаваемые вопросы",
+      "Доставка и возврат",
+      "Способы оплаты",
+      "Размерная сетка",
+      "Связаться с нами",
+    ],
+  },
+  services: {
+    title: "Услуги",
+    links: [
+      "Персональный шоппинг",
+      "Подарочная упаковка",
+      "Уход за изделиями",
+      "Ремонт и реставрация",
+    ],
+  },
+  company: {
+    title: "О нас",
+    links: [
+      "История дома",
+      "Устойчивое развитие",
+      "Карьера",
+      "Пресс-центр",
+    ],
+  },
+  legal: {
+    title: "Информация",
+    links: [
+      "Условия использования",
+      "Политика конфиденциальности",
+      "Настройки cookie",
+    ],
+  },
+}
 
 export function Footer() {
   const [email, setEmail] = useState("")
+  const [isSubscribed, setIsSubscribed] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle newsletter signup
+    setIsSubscribed(true)
     setEmail("")
+    setTimeout(() => setIsSubscribed(false), 3000)
   }
 
   return (
-    <footer className="bg-footer text-white">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Customer Service */}
-          <div>
-            <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-Служба поддержки
-            </h3>
-            <ul className="space-y-3">
-              {customerServiceLinks.map((link) => (
-                <li key={link}>
-                  <Link
-                    href="#"
-                    className="text-sm font-light text-white/60 hover:text-white transition-colors tracking-wide"
-                  >
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-Правовая информация
-            </h3>
-            <ul className="space-y-3">
-              {legalLinks.map((link) => (
-                <li key={link}>
-                  <Link
-                    href="#"
-                    className="text-sm font-light text-white/60 hover:text-white transition-colors tracking-wide"
-                  >
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Follow Us */}
-          <div>
-            <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-Мы в соцсетях
-            </h3>
-            <div className="flex items-center gap-4">
-              <Link
-                href="#"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-white/60 hover:text-white transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </Link>
+    <footer className="bg-foreground text-background">
+      {/* Newsletter Section */}
+      <div className="border-b border-background/10">
+        <div className="max-w-[1600px] mx-auto px-4 lg:px-8 py-12 lg:py-16">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="font-serif text-2xl lg:text-3xl tracking-[0.1em] uppercase mb-2">
+                Подпишитесь на рассылку
+              </h3>
+              <p className="text-background/60 text-sm font-light tracking-wide">
+                Будьте в курсе новых коллекций и эксклюзивных предложений
+              </p>
             </div>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-              Рассылка
-            </h3>
-            <p className="text-sm font-light text-white/60 mb-4 leading-relaxed">
-              Подпишитесь на рассылку, чтобы узнавать о новых коллекциях и эксклюзивных предложениях.
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Введите ваш email"
-                className="bg-transparent border-b border-white/30 py-2 text-sm font-light text-white placeholder:text-white/40 focus:outline-none focus:border-white transition-colors"
-                required
-              />
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1 relative">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Введите ваш email"
+                  className="w-full bg-transparent border border-background/30 px-4 py-3.5 text-sm tracking-wide placeholder:text-background/40 focus:outline-none focus:border-background transition-colors"
+                  required
+                />
+              </div>
               <button
                 type="submit"
-                className="self-start relative text-white tracking-[0.15em] text-xs font-light uppercase group"
+                className="px-8 py-3.5 bg-background text-foreground tracking-[0.2em] text-[11px] font-medium uppercase hover:bg-background/90 transition-colors"
               >
-                Подписаться
-                <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-white/50" />
-                <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
+                {isSubscribed ? "Спасибо!" : "Подписаться"}
               </button>
             </form>
           </div>
         </div>
+      </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 mt-16 pt-12">
-          <div className="flex flex-col items-center gap-6">
-            {/* Brand Logo */}
-            <Link
-              href="/"
-              className="font-serif text-2xl lg:text-3xl tracking-[0.2em] uppercase text-white"
-            >
-              THREE SIDE
-            </Link>
-            
-            {/* Copyright */}
-            <p className="text-[11px] font-light text-white/40 tracking-wide">
-              © {new Date().getFullYear()} THREE SIDE. Все права защищены.
-            </p>
+      {/* Main Footer */}
+      <div className="max-w-[1600px] mx-auto px-4 lg:px-8 py-12 lg:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Contact */}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="tracking-[0.2em] text-[11px] font-medium uppercase mb-6 text-background/70">
+              Контакты
+            </h4>
+            <div className="flex flex-col gap-4">
+              <a href="#" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
+                <MapPin className="w-4 h-4" />
+                <span>Найти бутик</span>
+              </a>
+              <a href="tel:+78001234567" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
+                <Phone className="w-4 h-4" />
+                <span>8 800 123-45-67</span>
+              </a>
+              <a href="mailto:contact@threeside.com" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
+                <Mail className="w-4 h-4" />
+                <span>contact@threeside.com</span>
+              </a>
+            </div>
           </div>
+
+          {/* Links */}
+          {Object.values(footerLinks).map((section) => (
+            <div key={section.title}>
+              <h4 className="tracking-[0.2em] text-[11px] font-medium uppercase mb-6 text-background/70">
+                {section.title}
+              </h4>
+              <ul className="flex flex-col gap-3">
+                {section.links.map((link) => (
+                  <li key={link}>
+                    <Link
+                      href="#"
+                      className="text-sm text-background/60 hover:text-background transition-colors tracking-wide"
+                    >
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Social & Copyright */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mt-16 pt-8 border-t border-background/10">
+          <div className="flex items-center gap-6">
+            <Link href="#" className="text-background/60 hover:text-background transition-colors" aria-label="Instagram">
+              <Instagram className="w-5 h-5" />
+            </Link>
+            <Link href="#" className="text-background/60 hover:text-background transition-colors" aria-label="Facebook">
+              <Facebook className="w-5 h-5" />
+            </Link>
+            <Link href="#" className="text-background/60 hover:text-background transition-colors" aria-label="YouTube">
+              <Youtube className="w-5 h-5" />
+            </Link>
+          </div>
+
+          <Link
+            href="/"
+            className="font-serif text-xl lg:text-2xl tracking-[0.3em] uppercase"
+          >
+            THREE SIDE
+          </Link>
+
+          <p className="text-[11px] text-background/40 tracking-wide">
+            © {new Date().getFullYear()} THREE SIDE. Все права защищены.
+          </p>
         </div>
       </div>
     </footer>
