@@ -5,19 +5,19 @@ import { Instagram, Facebook, Twitter, Youtube } from "lucide-react"
 import { useState } from "react"
 
 const customerServiceLinks = [
-  "Contact Us",
-  "FAQs",
-  "Shipping & Delivery",
-  "Returns & Exchanges",
-  "Product Care",
-  "Store Locator",
+  "Связаться с нами",
+  "Частые вопросы",
+  "Доставка",
+  "Возврат и обмен",
+  "Уход за изделиями",
+  "Найти магазин",
 ]
 
 const legalLinks = [
-  "Terms & Conditions",
-  "Privacy Policy",
-  "Cookie Policy",
-  "Accessibility",
+  "Условия использования",
+  "Политика конфиденциальности",
+  "Политика Cookie",
+  "Доступность",
 ]
 
 export function Footer() {
@@ -36,7 +36,7 @@ export function Footer() {
           {/* Customer Service */}
           <div>
             <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-              Customer Service
+Служба поддержки
             </h3>
             <ul className="space-y-3">
               {customerServiceLinks.map((link) => (
@@ -55,7 +55,7 @@ export function Footer() {
           {/* Legal */}
           <div>
             <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-              Legal
+Правовая информация
             </h3>
             <ul className="space-y-3">
               {legalLinks.map((link) => (
@@ -74,7 +74,7 @@ export function Footer() {
           {/* Follow Us */}
           <div>
             <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-              Follow Us
+Мы в соцсетях
             </h3>
             <div className="flex items-center gap-4">
               <Link
@@ -111,17 +111,17 @@ export function Footer() {
           {/* Newsletter */}
           <div>
             <h3 className="tracking-[0.2em] text-[11px] font-light uppercase mb-6 text-white/70">
-              Newsletter
+              Рассылка
             </h3>
             <p className="text-sm font-light text-white/60 mb-4 leading-relaxed">
-              Subscribe to receive updates on new collections and exclusive offers.
+              Подпишитесь на рассылку, чтобы узнавать о новых коллекциях и эксклюзивных предложениях.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                placeholder="Введите ваш email"
                 className="bg-transparent border-b border-white/30 py-2 text-sm font-light text-white placeholder:text-white/40 focus:outline-none focus:border-white transition-colors"
                 required
               />
@@ -129,7 +129,7 @@ export function Footer() {
                 type="submit"
                 className="self-start relative text-white tracking-[0.15em] text-xs font-light uppercase group"
               >
-                Subscribe
+                Подписаться
                 <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-white/50" />
                 <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
               </button>
@@ -150,7 +150,7 @@ export function Footer() {
             
             {/* Copyright */}
             <p className="text-[11px] font-light text-white/40 tracking-wide">
-              © {new Date().getFullYear()} THREE SIDE. All rights reserved.
+              © {new Date().getFullYear()} THREE SIDE. Все права защищены.
             </p>
           </div>
         </div>

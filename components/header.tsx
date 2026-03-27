@@ -5,13 +5,13 @@ import { Menu, Search, Phone, Heart, User, ShoppingBag, X } from "lucide-react"
 import Link from "next/link"
 
 const categories = [
-  "New",
-  "Bags and Wallets",
-  "Women",
-  "Men",
-  "Perfumes and Beauty",
-  "Jewellery",
-  "Watches",
+  "Новинки",
+  "Сумки и Кошельки",
+  "Женщинам",
+  "Мужчинам",
+  "Парфюмерия и Красота",
+  "Украшения",
+  "Часы",
 ]
 
 export function Header() {
@@ -43,7 +43,7 @@ export function Header() {
             } hover:opacity-70`}
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            <span className="hidden sm:inline">{isMobileMenuOpen ? "Close" : "Menu"}</span>
+            <span className="hidden sm:inline">{isMobileMenuOpen ? "Закрыть" : "Меню"}</span>
           </button>
           <button
             className={`flex items-center gap-2 tracking-[0.15em] text-xs font-light uppercase transition-colors ${
@@ -51,7 +51,7 @@ export function Header() {
             } hover:opacity-70`}
           >
             <Search className="w-5 h-5" />
-            <span className="hidden sm:inline">Search</span>
+            <span className="hidden sm:inline">Поиск</span>
           </button>
         </div>
 
@@ -73,13 +73,13 @@ export function Header() {
             } hover:opacity-70`}
           >
             <Phone className="w-4 h-4" />
-            <span className="hidden lg:inline">Call Us</span>
+            <span className="hidden lg:inline">Позвонить</span>
           </button>
           <button
             className={`transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             } hover:opacity-70`}
-            aria-label="Wishlist"
+            aria-label="Избранное"
           >
             <Heart className="w-5 h-5" />
           </button>
@@ -87,7 +87,7 @@ export function Header() {
             className={`transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             } hover:opacity-70`}
-            aria-label="Account"
+            aria-label="Аккаунт"
           >
             <User className="w-5 h-5" />
           </button>
@@ -95,7 +95,7 @@ export function Header() {
             className={`transition-colors ${
               isScrolled ? "text-foreground" : "text-white"
             } hover:opacity-70`}
-            aria-label="Shopping bag"
+            aria-label="Корзина"
           >
             <ShoppingBag className="w-5 h-5" />
           </button>

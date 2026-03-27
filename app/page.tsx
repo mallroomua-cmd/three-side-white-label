@@ -16,10 +16,10 @@ export default function Home() {
       {/* Editorial Section 1 - Split Layout */}
       <EditorialSection
         layout="split"
-        category="Accessories"
-        title="The Art of Travel"
-        description="From timeless trunks to modern carry-ons, discover luggage crafted for the discerning traveler. Each piece embodies over a century of expertise in the art of travel."
-        ctaText="Explore Travel"
+        category="Аксессуары"
+        title="Искусство Путешествий"
+        description="От классических чемоданов до современных дорожных сумок — откройте для себя багаж, созданный для взыскательных путешественников. Каждое изделие воплощает более чем вековой опыт в искусстве путешествий."
+        ctaText="Смотреть Travel"
         ctaLink="#"
         image="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1200&auto=format&fit=crop"
       />
@@ -27,10 +27,10 @@ export default function Home() {
       {/* Editorial Section 2 - Full Width */}
       <EditorialSection
         layout="full"
-        category="Summer 2024"
-        title="Ocean Breeze"
-        description="A collection inspired by the endless horizon and the gentle caress of sea winds."
-        ctaText="Discover the Collection"
+        category="Лето 2024"
+        title="Морской Бриз"
+        description="Коллекция, вдохновлённая бескрайним горизонтом и нежным прикосновением морского ветра."
+        ctaText="Смотреть коллекцию"
         ctaLink="#"
         image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop"
       />
@@ -45,9 +45,9 @@ export default function Home() {
       <EditorialSection
         layout="split-reverse"
         category="Haute Maroquinerie"
-        title="Craftsmanship Reimagined"
-        description="Our artisans blend centuries-old techniques with contemporary vision, creating pieces that transcend time. Each stitch tells a story of dedication and passion."
-        ctaText="Meet Our Artisans"
+        title="Мастерство в Новом Свете"
+        description="Наши мастера сочетают вековые техники с современным видением, создавая изделия, неподвластные времени. Каждый стежок рассказывает историю преданности и страсти к делу."
+        ctaText="Познакомиться с мастерами"
         ctaLink="#"
         image="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200&auto=format&fit=crop"
         bgColor="bg-secondary"

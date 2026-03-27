@@ -32,7 +32,7 @@ export function Hero() {
           }`}
         >
           <span className="tracking-[0.3em] text-[11px] font-light uppercase text-white/90">
-            Women
+            Женская коллекция
           </span>
         </div>
 
@@ -41,7 +41,7 @@ export function Hero() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Nautical
+          Морской Бриз
         </h1>
 
         <div
@@ -53,7 +53,7 @@ export function Hero() {
             href="#"
             className="relative text-white tracking-[0.15em] text-xs font-light uppercase group"
           >
-            Discover the Collection
+            Смотреть коллекцию
             <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-white" />
             <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>
@@ -61,7 +61,7 @@ export function Hero() {
             href="#"
             className="relative text-white tracking-[0.15em] text-xs font-light uppercase group"
           >
-            Shop New Arrivals
+            Новые поступления
             <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-white" />
             <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>

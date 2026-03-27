@@ -15,23 +15,23 @@ interface Product {
 const products: Product[] = [
   {
     id: "1",
-    category: "Bags",
+    category: "Сумки",
     name: "Capucines MM",
-    price: "$5,800",
+    price: "520 000 руб.",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "2",
-    category: "Small Leather Goods",
-    name: "Zippy Wallet",
-    price: "$1,050",
+    category: "Кожаные Аксессуары",
+    name: "Zippy Кошелёк",
+    price: "95 000 руб.",
     image: "https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "3",
-    category: "Bags",
+    category: "Сумки",
     name: "Petite Malle",
-    price: "$6,200",
+    price: "560 000 руб.",
     image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=800&auto=format&fit=crop",
   },
 ]
@@ -120,10 +120,10 @@ export function ProductGrid() {
           }`}
         >
           <span className="tracking-[0.3em] text-[11px] font-light uppercase text-muted-foreground">
-            Featured
+            Избранное
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground mt-4 tracking-[0.02em]">
-            New Arrivals
+            Новые Поступления
           </h2>
         </div>
 
@@ -142,7 +142,7 @@ export function ProductGrid() {
             href="#"
             className="relative inline-block text-foreground tracking-[0.15em] text-xs font-light uppercase group"
           >
-            View All Products
+            Смотреть все товары
             <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-foreground" />
             <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
           </Link>
