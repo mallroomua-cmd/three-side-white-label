@@ -7,17 +7,17 @@ import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from "lucide
 const slides = [
   {
     id: 1,
-    image: "/images/hero-woman.jpg",
-    category: "Женская коллекция",
-    title: "Круизная Коллекция 2026",
-    cta: "Смотреть коллекцию",
+    image: "/images/hero-beach.jpg",
+    category: "Жіноча колекція",
+    title: "Круїзна Колекція 2026",
+    cta: "Переглянути колекцію",
   },
   {
     id: 2,
-    image: "/images/men-collection.jpg",
-    category: "Мужская коллекция",
-    title: "Весна-Лето 2026",
-    cta: "Открыть",
+    image: "/images/hero-men.jpg",
+    category: "Чоловіча колекція",
+    title: "Весна-Літо 2026",
+    cta: "Відкрити",
   },
 ]
 
@@ -129,7 +129,7 @@ export function Hero() {
               key={index}
               onClick={() => goToSlide(index)}
               className="relative h-[2px] w-8 lg:w-12 bg-white/30 overflow-hidden"
-              aria-label={`Перейти к слайду ${index + 1}`}
+              aria-label={`Перейти до слайду ${index + 1}`}
             >
               <div
                 className="absolute inset-y-0 left-0 bg-white transition-all duration-100"
@@ -146,14 +146,14 @@ export function Hero() {
       <button
         onClick={prevSlide}
         className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors"
-        aria-label="Предыдущий слайд"
+        aria-label="Попередній слайд"
       >
         <ChevronLeft className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
       </button>
       <button
         onClick={nextSlide}
         className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors"
-        aria-label="Следующий слайд"
+        aria-label="Наступний слайд"
       >
         <ChevronRight className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
       </button>
@@ -163,14 +163,14 @@ export function Hero() {
         <button
           onClick={() => setIsPaused(!isPaused)}
           className="p-2 text-white/70 hover:text-white transition-colors"
-          aria-label={isPaused ? "Воспроизвести" : "Пауза"}
+          aria-label={isPaused ? "Відтворити" : "Пауза"}
         >
           {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
         </button>
         <button
           onClick={() => setIsMuted(!isMuted)}
           className="p-2 text-white/70 hover:text-white transition-colors"
-          aria-label={isMuted ? "Включить звук" : "Выключить звук"}
+          aria-label={isMuted ? "Увімкнути звук" : "Вимкнути звук"}
         >
           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </button>

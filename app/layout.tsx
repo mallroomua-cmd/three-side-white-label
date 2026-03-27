@@ -18,8 +18,8 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'THREE SIDE | Дом Высокой Моды',
-  description: 'Откройте мир THREE SIDE. Исследуйте наши коллекции роскошных сумок, одежды, парфюмерии и украшений.',
+  title: 'THREE SIDE | Дім Високої Моди',
+  description: 'Відкрийте світ THREE SIDE. Досліджуйте наші колекції розкішних сумок, одягу, парфумерії та прикрас.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang="uk" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

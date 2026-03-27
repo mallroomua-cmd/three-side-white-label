@@ -7,14 +7,14 @@ import Link from "next/link"
 const mainNav = [
   "Мода",
   "Сумки",
-  "Обувь",
-  "Аксессуары",
-  "Парфюмерия",
-  "Красота",
-  "Украшения",
-  "Часы",
-  "Дом",
-  "Подарки",
+  "Взуття",
+  "Аксесуари",
+  "Парфумерія",
+  "Краса",
+  "Прикраси",
+  "Годинники",
+  "Дім",
+  "Подарунки",
 ]
 
 export function Header() {
@@ -46,23 +46,23 @@ export function Header() {
               isScrolled ? "text-foreground" : "text-white"
             }`}>
               <MapPin className="w-3 h-3" />
-              <span>Найти бутик</span>
+              <span>Знайти бутик</span>
             </button>
             <button className={`flex items-center gap-1.5 transition-colors hover:opacity-70 ${
               isScrolled ? "text-foreground" : "text-white"
             }`}>
               <Globe className="w-3 h-3" />
-              <span>Россия</span>
+              <span>Україна</span>
             </button>
           </div>
           <div className={`transition-colors ${isScrolled ? "text-foreground" : "text-white"}`}>
-            Бесплатная доставка по всей России
+            Безкоштовна доставка по всій Україні
           </div>
           <div className="flex items-center gap-6">
             <Link href="#" className={`transition-colors hover:opacity-70 ${
               isScrolled ? "text-foreground" : "text-white"
             }`}>
-              Связаться с нами
+              {"Зв'язатися з нами"}
             </Link>
           </div>
         </div>
@@ -76,7 +76,7 @@ export function Header() {
               className={`p-1 transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
-              aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+              aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -99,7 +99,7 @@ export function Header() {
               className={`p-1 transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
-              aria-label="Поиск"
+              aria-label="Пошук"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -107,7 +107,7 @@ export function Header() {
               className={`hidden sm:block p-1 transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
-              aria-label="Избранное"
+              aria-label="Обране"
             >
               <Heart className="w-5 h-5" />
             </button>
@@ -115,7 +115,7 @@ export function Header() {
               className={`p-1 transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
-              aria-label="Аккаунт"
+              aria-label="Акаунт"
             >
               <User className="w-5 h-5" />
             </button>
@@ -123,7 +123,7 @@ export function Header() {
               className={`p-1 transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
-              aria-label="Корзина"
+              aria-label="Кошик"
             >
               <ShoppingBag className="w-5 h-5" />
             </button>
@@ -181,11 +181,11 @@ export function Header() {
           <div className="mt-auto pt-8 flex flex-col gap-4">
             <button className="flex items-center gap-2 text-sm tracking-[0.1em] uppercase text-muted-foreground">
               <MapPin className="w-4 h-4" />
-              Найти бутик
+              Знайти бутик
             </button>
             <button className="flex items-center gap-2 text-sm tracking-[0.1em] uppercase text-muted-foreground">
               <Globe className="w-4 h-4" />
-              Россия
+              Україна
             </button>
           </div>
         </div>
@@ -199,11 +199,11 @@ export function Header() {
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <span className="font-serif text-xl tracking-[0.2em] uppercase">Поиск</span>
+            <span className="font-serif text-xl tracking-[0.2em] uppercase">Пошук</span>
             <button
               onClick={() => setIsSearchOpen(false)}
               className="p-1 hover:opacity-70 transition-colors"
-              aria-label="Закрыть поиск"
+              aria-label="Закрити пошук"
             >
               <X className="w-6 h-6" />
             </button>
@@ -213,7 +213,7 @@ export function Header() {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Что вы ищете?"
+                  placeholder="Що ви шукаєте?"
                   className="w-full bg-transparent border-b-2 border-foreground pb-4 text-2xl lg:text-3xl font-light tracking-wide placeholder:text-muted-foreground focus:outline-none"
                   autoFocus={isSearchOpen}
                 />
@@ -221,10 +221,10 @@ export function Header() {
               </div>
               <div className="mt-12">
                 <h3 className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground mb-4">
-                  Популярные запросы
+                  Популярні запити
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {["Сумки", "Новая коллекция", "Парфюм", "Подарки", "Украшения"].map((term) => (
+                  {["Сумки", "Нова колекція", "Парфуми", "Подарунки", "Прикраси"].map((term) => (
                     <button
                       key={term}
                       className="px-4 py-2 border border-border text-sm tracking-wide hover:bg-foreground hover:text-background transition-colors"

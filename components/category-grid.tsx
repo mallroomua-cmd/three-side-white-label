@@ -13,19 +13,19 @@ const categories = [
   },
   {
     id: 2,
-    name: "Обувь",
+    name: "Взуття",
     image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop",
     link: "#",
   },
   {
     id: 3,
-    name: "Аксессуары",
+    name: "Аксесуари",
     image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=800&auto=format&fit=crop",
     link: "#",
   },
   {
     id: 4,
-    name: "Украшения",
+    name: "Прикраси",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop",
     link: "#",
   },
@@ -61,7 +61,7 @@ export function CategoryGrid() {
           }`}
         >
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-[0.1em] uppercase text-foreground">
-            Категории
+            Категорії
           </h2>
         </div>
 

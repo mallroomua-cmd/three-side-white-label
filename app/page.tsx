@@ -17,11 +17,11 @@ export default function Home() {
       {/* Story Section - Full Width */}
       <StorySection
         fullWidth
-        image="/images/hero-woman.jpg"
-        category="Круизная Коллекция"
-        title="Женская Коллекция 2026"
-        description="Элегантность встречает современность в новой круизной коллекции. Откройте для себя изысканные силуэты и роскошные материалы."
-        ctaText="Коллекция 2026"
+        image="/images/hero-beach.jpg"
+        category="Круїзна Колекція"
+        title="Жіноча Колекція 2026"
+        description="Елегантність зустрічає сучасність у новій круїзній колекції. Відкрийте для себе вишукані силуети та розкішні матеріали."
+        ctaText="Колекція 2026"
         ctaLink="#"
       />
 
@@ -30,11 +30,11 @@ export default function Home() {
 
       {/* Story Section - Split */}
       <StorySection
-        image="/images/men-collection.jpg"
-        category="Мужская Коллекция"
-        title="Городской Стиль"
-        description="Откройте для себя коллекцию аксессуаров для современного мужчины. Рюкзаки, сумки и аксессуары, сочетающие практичность с безупречным стилем."
-        ctaText="Смотреть коллекцию"
+        image="/images/hero-men.jpg"
+        category="Чоловіча Колекція"
+        title="Міський Стиль"
+        description="Відкрийте для себе колекцію аксесуарів для сучасного чоловіка. Рюкзаки, сумки та аксесуари, що поєднують практичність з бездоганним стилем."
+        ctaText="Переглянути колекцію"
         ctaLink="#"
       />
 
@@ -42,10 +42,10 @@ export default function Home() {
       <StorySection
         reverse
         image="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1200&auto=format&fit=crop"
-        category="Парфюмерия"
-        title="Искусство Ароматов"
-        description="Погрузитесь в мир изысканных ароматов THREE SIDE. Каждый флакон — это история, рассказанная через ноты редких ингредиентов."
-        ctaText="Открыть парфюмерию"
+        category="Парфумерія"
+        title="Мистецтво Ароматів"
+        description="Поринь у світ вишуканих ароматів THREE SIDE. Кожен флакон — це історія, розказана через ноти рідкісних інгредієнтів."
+        ctaText="Відкрити парфумерію"
         ctaLink="#"
       />
 
@@ -53,10 +53,10 @@ export default function Home() {
       <StorySection
         fullWidth
         image="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2000&auto=format&fit=crop"
-        category="Мастерство"
-        title="Искусство Совершенства"
-        description="Каждое изделие THREE SIDE создаётся мастерами с многолетним опытом, хранящими традиции haute couture."
-        ctaText="Узнать больше"
+        category="Майстерність"
+        title="Мистецтво Досконалості"
+        description="Кожен виріб THREE SIDE створюється майстрами з багаторічним досвідом, які зберігають традиції haute couture."
+        ctaText="Дізнатися більше"
         ctaLink="#"
       />
 

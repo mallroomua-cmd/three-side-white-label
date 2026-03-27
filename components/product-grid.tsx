@@ -17,27 +17,27 @@ const products: Product[] = [
   {
     id: "1",
     name: "Lady THREE SIDE",
-    price: "520 000 ₽",
+    price: "185 000 грн",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop",
     isNew: true,
   },
   {
     id: "2",
     name: "Saddle Bag",
-    price: "380 000 ₽",
+    price: "135 000 грн",
     image: "https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop",
   },
   {
     id: "3",
     name: "Book Tote",
-    price: "420 000 ₽",
+    price: "149 000 грн",
     image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=800&auto=format&fit=crop",
     isNew: true,
   },
   {
     id: "4",
     name: "30 Montaigne",
-    price: "560 000 ₽",
+    price: "199 000 грн",
     image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800&auto=format&fit=crop",
   },
 ]
@@ -80,7 +80,7 @@ function ProductCard({ product, index, isVisible }: { product: Product; index: n
             className={`absolute top-4 right-4 p-2 transition-all duration-300 ${
               isHovered || isWishlisted ? "opacity-100" : "opacity-0"
             }`}
-            aria-label="Добавить в избранное"
+            aria-label="Додати до обраного"
           >
             <Heart
               className={`w-5 h-5 transition-colors ${
@@ -132,10 +132,10 @@ export function ProductGrid() {
           }`}
         >
           <span className="tracking-[0.3em] text-[10px] font-light uppercase text-muted-foreground block mb-3">
-            Избранное
+            Обране
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-[0.1em] uppercase text-foreground">
-            Культовые Сумки
+            Культові Сумки
           </h2>
         </div>
 
@@ -154,7 +154,7 @@ export function ProductGrid() {
             href="#"
             className="inline-block px-10 py-4 border border-foreground text-foreground tracking-[0.2em] text-[11px] font-medium uppercase hover:bg-foreground hover:text-background transition-all duration-300"
           >
-            Смотреть все сумки
+            Переглянути всі сумки
           </Link>
         </div>
       </div>

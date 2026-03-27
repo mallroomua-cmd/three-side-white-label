@@ -6,39 +6,39 @@ import { useState } from "react"
 
 const footerLinks = {
   help: {
-    title: "Помощь",
+    title: "Допомога",
     links: [
-      "Часто задаваемые вопросы",
-      "Доставка и возврат",
-      "Способы оплаты",
-      "Размерная сетка",
-      "Связаться с нами",
+      "Часті запитання",
+      "Доставка та повернення",
+      "Способи оплати",
+      "Розмірна сітка",
+      "Зв'язатися з нами",
     ],
   },
   services: {
-    title: "Услуги",
+    title: "Послуги",
     links: [
-      "Персональный шоппинг",
-      "Подарочная упаковка",
-      "Уход за изделиями",
-      "Ремонт и реставрация",
+      "Персональний шопінг",
+      "Подарункове пакування",
+      "Догляд за виробами",
+      "Ремонт та реставрація",
     ],
   },
   company: {
-    title: "О нас",
+    title: "Про нас",
     links: [
-      "История дома",
-      "Устойчивое развитие",
-      "Карьера",
-      "Пресс-центр",
+      "Історія дому",
+      "Сталий розвиток",
+      "Кар'єра",
+      "Прес-центр",
     ],
   },
   legal: {
-    title: "Информация",
+    title: "Інформація",
     links: [
-      "Условия использования",
-      "Политика конфиденциальности",
-      "Настройки cookie",
+      "Умови використання",
+      "Політика конфіденційності",
+      "Налаштування cookie",
     ],
   },
 }
@@ -62,10 +62,10 @@ export function Footer() {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="font-serif text-2xl lg:text-3xl tracking-[0.1em] uppercase mb-2">
-                Подпишитесь на рассылку
+                Підпишіться на розсилку
               </h3>
               <p className="text-background/60 text-sm font-light tracking-wide">
-                Будьте в курсе новых коллекций и эксклюзивных предложений
+                Будьте в курсі нових колекцій та ексклюзивних пропозицій
               </p>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -74,7 +74,7 @@ export function Footer() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Введите ваш email"
+                  placeholder="Введіть ваш email"
                   className="w-full bg-transparent border border-background/30 px-4 py-3.5 text-sm tracking-wide placeholder:text-background/40 focus:outline-none focus:border-background transition-colors"
                   required
                 />
@@ -83,7 +83,7 @@ export function Footer() {
                 type="submit"
                 className="px-8 py-3.5 bg-background text-foreground tracking-[0.2em] text-[11px] font-medium uppercase hover:bg-background/90 transition-colors"
               >
-                {isSubscribed ? "Спасибо!" : "Подписаться"}
+                {isSubscribed ? "Дякуємо!" : "Підписатися"}
               </button>
             </form>
           </div>
@@ -96,16 +96,16 @@ export function Footer() {
           {/* Contact */}
           <div className="col-span-2 md:col-span-1">
             <h4 className="tracking-[0.2em] text-[11px] font-medium uppercase mb-6 text-background/70">
-              Контакты
+              Контакти
             </h4>
             <div className="flex flex-col gap-4">
               <a href="#" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
                 <MapPin className="w-4 h-4" />
-                <span>Найти бутик</span>
+                <span>Знайти бутик</span>
               </a>
-              <a href="tel:+78001234567" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
+              <a href="tel:+380800123456" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>8 800 123-45-67</span>
+                <span>0 800 123-456</span>
               </a>
               <a href="mailto:contact@threeside.com" className="flex items-center gap-3 text-sm text-background/60 hover:text-background transition-colors">
                 <Mail className="w-4 h-4" />
@@ -158,7 +158,7 @@ export function Footer() {
           </Link>
 
           <p className="text-[11px] text-background/40 tracking-wide">
-            © {new Date().getFullYear()} THREE SIDE. Все права защищены.
+            © {new Date().getFullYear()} THREE SIDE. Усі права захищені.
           </p>
         </div>
       </div>
