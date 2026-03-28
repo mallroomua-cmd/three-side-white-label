@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from "lucide
 const slides = [
   {
     id: 1,
-    image: "/images/hero-first-page.png",
+    image: "/images/hero-home.png",
     category: "Жіноча колекція",
     title: "NEW ERA FASHION",
     cta: "Переглянути колекцію",
@@ -92,20 +92,20 @@ export function Hero() {
         </div>
       ))}
 
-      <div className="relative z-20 h-full flex flex-col items-center justify-end pb-44 lg:pb-56 px-6 text-center">
-        <div>
-          <span className="font-sans font-extralight tracking-[0.3em] text-[10px] lg:text-[11px] uppercase text-white/80 block mb-4">
+      <div className="relative z-20 flex h-full flex-col items-center justify-end px-6 pb-44 text-center lg:items-start lg:justify-end lg:px-10 lg:pb-28 lg:text-left xl:px-16 xl:pb-36">
+        <div className="w-full max-w-4xl lg:max-w-3xl">
+          <span className="mb-4 block font-sans text-[10px] font-extralight uppercase tracking-[0.3em] text-white/80 lg:text-[11px]">
             {slides[currentSlide].category}
           </span>
-          <h1 className="font-serif font-light text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white tracking-[0.2em] uppercase">
+          <h1 className="font-serif text-4xl font-light uppercase tracking-[0.2em] text-white sm:text-5xl lg:text-7xl xl:text-8xl">
             {slides[currentSlide].title}
           </h1>
         </div>
 
-        <div>
+        <div className="mt-10 w-full max-w-4xl lg:mt-12 lg:max-w-3xl">
           <Link
             href="/category/all"
-            className="mt-12 inline-block px-10 py-4 border border-white/50 bg-white/95 text-foreground tracking-[0.24em] text-[11px] font-extralight uppercase rounded-none transition-all duration-700 ease-out hover:bg-foreground hover:text-background hover:border-foreground"
+            className="inline-block border border-white/50 bg-white/95 px-10 py-4 font-sans text-[11px] font-extralight uppercase tracking-[0.24em] text-foreground transition-all duration-700 ease-out rounded-none hover:border-foreground hover:bg-foreground hover:text-background"
           >
             {slides[currentSlide].cta}
           </Link>

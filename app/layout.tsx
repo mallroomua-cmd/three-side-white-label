@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { CartProvider } from '@/components/cart-provider'
 import { getAppUrl } from '@/lib/get-app-url'
@@ -28,9 +29,10 @@ const cormorant = Cormorant_Garamond({
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
-  weight: ['200', '300', '400'],
+  weight: ['200', '300'],
   variable: '--font-montserrat',
   display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -84,6 +86,7 @@ export default function RootLayout({
           <Toaster position="top-center" richColors closeButton />
         </CartProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

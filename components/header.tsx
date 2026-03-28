@@ -115,42 +115,92 @@ export function Header() {
           </div>
         </div>
 
-        {/* Main Header */}
-        <div className="flex items-center justify-between px-4 lg:px-8 py-4">
-          {/* Left - Menu */}
-          <div className="flex items-center gap-4 lg:hidden">
+        {/* Main Header — mobile: menu | logo | cart + search row */}
+        <div className="lg:hidden">
+          <div className="flex min-h-10 items-center justify-between gap-2 px-4 pt-3 pb-2">
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-1 transition-colors ${
+              className={`inline-flex shrink-0 items-center justify-center p-1 transition-colors duration-700 ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
               aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" strokeWidth={1} aria-hidden />
+                <X className="h-6 w-6 shrink-0" strokeWidth={1} aria-hidden />
               ) : (
-                <Menu className="w-6 h-6" strokeWidth={1} aria-hidden />
+                <Menu className="h-6 w-6 shrink-0" strokeWidth={1} aria-hidden />
               )}
             </button>
+
+            <Link
+              href="/"
+              className={`min-w-0 flex-1 px-1 text-center font-serif font-light text-lg sm:text-xl tracking-[0.2em] uppercase transition-colors duration-700 ${
+                isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
+              }`}
+            >
+              <span className="block truncate">THREE SIDE</span>
+            </Link>
+
+            <Link
+              href="/cart"
+              className={`relative inline-flex shrink-0 items-center justify-center p-1 transition-colors duration-700 ${
+                isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
+              } hover:opacity-70`}
+              aria-label="Кошик"
+            >
+              <ShoppingBag className="h-6 w-6 shrink-0" strokeWidth={1} aria-hidden />
+              {totalQuantity > 0 ? (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-[1rem] items-center justify-center bg-foreground px-0.5 font-sans text-[9px] font-extralight tabular-nums text-background rounded-none">
+                  {totalQuantity > 99 ? "99+" : totalQuantity}
+                </span>
+              ) : null}
+            </Link>
           </div>
 
-          {/* Center - Brand Name */}
+          <div className="px-4 pb-3 pt-0">
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Відкрити пошук"
+              className={`group flex w-full items-center gap-3 border-[0.5px] px-4 py-3 rounded-none text-left transition-colors duration-700 ease-out ${
+                isScrolled || isMobileMenuOpen
+                  ? "border-brand-ghost/40 bg-secondary/40 text-muted-foreground hover:border-brand-ghost/60"
+                  : "border-white/40 bg-white/10 text-white/90 hover:bg-white/15"
+              }`}
+            >
+              <Search
+                className={`h-4 w-4 shrink-0 opacity-80 transition-opacity duration-700 group-hover:opacity-100 ${
+                  isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
+                }`}
+                strokeWidth={1}
+                aria-hidden
+              />
+              <span className="font-sans font-extralight text-[11px] tracking-[0.28em] uppercase truncate">
+                Пошук у колекції Spring 2026
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Main Header — desktop */}
+        <div className="relative hidden lg:flex items-center justify-between px-8 py-4">
+          <div className="w-8 shrink-0" aria-hidden />
+
           <Link
             href="/"
-            className={`absolute left-1/2 -translate-x-1/2 font-serif font-light text-2xl sm:text-3xl lg:text-4xl tracking-[0.2em] uppercase transition-colors duration-700 ${
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif font-light text-3xl xl:text-4xl tracking-[0.2em] uppercase transition-colors duration-700 ${
               isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
             }`}
           >
             THREE SIDE
           </Link>
 
-          {/* Right - Icons */}
-          <div className="flex items-center gap-3 lg:gap-5 ml-auto">
+          <div className="relative z-10 flex items-center gap-5">
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className={`p-1 transition-colors ${
+              className={`p-1 transition-colors duration-700 ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
               aria-label="Пошук"
@@ -159,7 +209,7 @@ export function Header() {
             </button>
             <button
               type="button"
-              className={`hidden sm:block p-1 transition-colors ${
+              className={`p-1 transition-colors duration-700 ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
               aria-label="Обране"
@@ -168,7 +218,7 @@ export function Header() {
             </button>
             <button
               type="button"
-              className={`p-1 transition-colors ${
+              className={`p-1 transition-colors duration-700 ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
               aria-label="Акаунт"
@@ -177,7 +227,7 @@ export function Header() {
             </button>
             <Link
               href="/cart"
-              className={`relative p-1 transition-colors ${
+              className={`relative p-1 transition-colors duration-700 ${
                 isScrolled || isMobileMenuOpen ? "text-foreground" : "text-white"
               } hover:opacity-70`}
               aria-label="Кошик"
@@ -219,10 +269,9 @@ export function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-background transition-all duration-500 lg:hidden ${
+        className={`fixed left-0 right-0 bottom-0 top-[7.5rem] z-40 bg-background transition-all duration-500 lg:hidden ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
-        style={{ top: "64px" }}
       >
         <div className="flex flex-col h-full overflow-y-auto py-8 px-6">
           <motion.nav

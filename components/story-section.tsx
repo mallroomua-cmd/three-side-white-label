@@ -15,6 +15,8 @@ interface StorySectionProps {
   ctaLink: string
   reverse?: boolean
   fullWidth?: boolean
+  fullWidthImageClassName?: string
+  fullWidthScrimClassName?: string
 }
 
 export function StorySection({
@@ -26,6 +28,8 @@ export function StorySection({
   ctaLink,
   reverse = false,
   fullWidth = false,
+  fullWidthImageClassName,
+  fullWidthScrimClassName = "bg-black/24",
 }: StorySectionProps) {
   const reveal = {
     hidden: { opacity: 0, y: 8 },
@@ -53,10 +57,10 @@ export function StorySection({
             alt={title}
             fill
             sizes="100vw"
-            quality={85}
-            className="object-cover object-center"
+            quality={92}
+            className={`object-cover object-center ${fullWidthImageClassName ?? ""}`}
           />
-          <div className="absolute inset-0 bg-black/24" />
+          <div className={`absolute inset-0 ${fullWidthScrimClassName}`} />
         </motion.div>
 
         <motion.div

@@ -16,10 +16,9 @@ export type ProductGridItem = {
   isNew?: boolean
 }
 
-function ProductCard({ product, index }: { product: ProductGridItem; index: number }) {
+function ProductCard({ product }: { product: ProductGridItem }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(false)
-  const isAboveFoldRow = index < 4
 
   return (
     <motion.div
@@ -40,7 +39,6 @@ function ProductCard({ product, index }: { product: ProductGridItem; index: numb
             fill
             sizes="(max-width: 1024px) 50vw, 25vw"
             quality={85}
-            priority={isAboveFoldRow}
             className={`object-cover transition-transform duration-1000 ease-out ${
               isHovered ? "scale-[1.04]" : "scale-100"
             }`}
@@ -117,10 +115,12 @@ export function ProductGrid({ items }: ProductGridProps) {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-x-10 lg:gap-y-24">
-          {items.map((product, index) => (
-            <ProductCard key={product.slug} product={product} index={index} />
-          ))}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-16 lg:col-span-10 lg:col-start-2 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-24">
+            {items.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
         </div>
 
         <motion.div

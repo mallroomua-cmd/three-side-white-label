@@ -35,7 +35,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <section className="pt-36 pb-24 lg:pt-44 lg:pb-32 px-5 lg:px-10">
+      <section className="px-5 pb-24 pt-[7.5rem] lg:px-10 lg:pb-32 lg:pt-44">
         <div className="max-w-[640px] mx-auto text-center lg:text-left">
           <p className="font-sans font-extralight text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-3">
             Зв&apos;язок

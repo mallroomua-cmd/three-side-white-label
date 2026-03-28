@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 
@@ -32,7 +30,7 @@ export function CategoryLayout({
   const hasProducts = products.length > 0
 
   return (
-    <section className="min-h-screen bg-background pt-36 pb-24 lg:pt-44 lg:pb-32 px-5 lg:px-10">
+    <section className="min-h-screen bg-background px-5 pb-24 pt-[7.5rem] lg:px-10 lg:pb-32 lg:pt-44">
       <div className="max-w-[1600px] mx-auto">
         <header className="text-center border-b border-[0.5px] border-brand-ghost/50 pb-16 lg:pb-20">
           <p className="font-sans font-extralight text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4">Категорія</p>
@@ -86,7 +84,7 @@ export function CategoryLayout({
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       quality={85}
-                      priority={idx < 3}
+                      priority={idx === 0}
                       className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
                     />
                   </div>

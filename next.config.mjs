@@ -9,15 +9,9 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000,
+    /** Keep low enough that replacing a file under /public/images with the same name shows up after deploy. */
+    minimumCacheTTL: 3600,
     dangerouslyAllowSVG: false,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**',
-      },
-    ],
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
@@ -46,7 +40,8 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value:
+              'public, max-age=86400, stale-while-revalidate=604800',
           },
         ],
       },

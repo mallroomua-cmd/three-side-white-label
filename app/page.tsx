@@ -1,14 +1,45 @@
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 
-import { CategoryGrid } from "@/components/category-grid"
-import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { HomeJsonLd } from "@/components/home-json-ld"
-import { ProductGrid } from "@/components/product-grid"
-import { StorySection } from "@/components/story-section"
 import { getProductBySlug, HOME_FEATURED_SLUGS } from "@/lib/catalog"
 import { absoluteOgDefaultUrl, defaultOgImageFields } from "@/lib/og-default-meta"
+
+import type { ProductGridItem } from "@/components/product-grid"
+
+const CategoryGrid = dynamic(
+  () => import("@/components/category-grid").then((m) => ({ default: m.CategoryGrid })),
+  {
+    ssr: true,
+    loading: () => <div className="min-h-[280px] bg-background" aria-hidden />,
+  },
+)
+
+const StorySection = dynamic(
+  () => import("@/components/story-section").then((m) => ({ default: m.StorySection })),
+  {
+    ssr: true,
+    loading: () => <div className="min-h-[50vh] bg-background" aria-hidden />,
+  },
+)
+
+const ProductGrid = dynamic(
+  () => import("@/components/product-grid").then((m) => ({ default: m.ProductGrid })),
+  {
+    ssr: true,
+    loading: () => <div className="min-h-[480px] bg-background" aria-hidden />,
+  },
+)
+
+const Footer = dynamic(
+  () => import("@/components/footer").then((m) => ({ default: m.Footer })),
+  {
+    ssr: true,
+    loading: () => <div className="min-h-[240px] bg-secondary" aria-hidden />,
+  },
+)
 
 const homeDescription =
   "Відкрийте світ THREE SIDE. Досліджуйте наші колекції розкішних сумок, одягу, парфумерії та прикрас."
@@ -37,18 +68,20 @@ export const metadata: Metadata = {
   },
 }
 
-function getFeaturedGridItems() {
-  return HOME_FEATURED_SLUGS.map((slug) => {
+function getFeaturedGridItems(): ProductGridItem[] {
+  const items: ProductGridItem[] = []
+  for (const slug of HOME_FEATURED_SLUGS) {
     const p = getProductBySlug(slug)
-    if (!p) return null
-    return {
+    if (!p) continue
+    items.push({
       slug: p.slug,
       name: p.name,
       price: p.priceLabel,
       image: p.image,
       isNew: p.isNew,
-    }
-  }).filter((item): item is NonNullable<typeof item> => item != null)
+    })
+  }
+  return items
 }
 
 export default function Home() {
@@ -65,7 +98,7 @@ export default function Home() {
 
         <StorySection
           fullWidth
-          image="/images/collection-main.png"
+          image="/images/collection-cruise-2026.png"
           category="Круїзна Колекція"
           title="Жіноча Колекція 2026"
           description="Елегантність зустрічає сучасність у новій круїзній колекції. Відкрийте для себе вишукані силуети та розкішні матеріали."
@@ -96,7 +129,9 @@ export default function Home() {
 
         <StorySection
           fullWidth
-          image="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2000&auto=format&fit=crop"
+          image="/images/story-craftsmanship-atelier.jpg"
+          fullWidthImageClassName="object-[36%_50%] max-lg:object-[42%_48%]"
+          fullWidthScrimClassName="bg-black/32"
           category="Майстерність"
           title="Мистецтво Досконалості"
           description="Кожен виріб THREE SIDE створюється майстрами з багаторічним досвідом, які зберігають традиції haute couture."

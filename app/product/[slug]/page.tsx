@@ -78,7 +78,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
       <main className="min-h-screen bg-background">
         <Header />
-        <article className="pt-32 lg:pt-40 pb-24 lg:pb-32 px-5 lg:px-10">
+        <article className="px-5 pb-24 pt-[7.5rem] lg:px-10 lg:pb-32 lg:pt-40">
           <div className="max-w-[1200px] mx-auto">
             <nav className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-extralight mb-10 lg:mb-14">
               <Link href={categoryHref} className="hover:text-foreground transition-colors duration-700 ease-out">
