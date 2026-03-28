@@ -4,32 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #000000;
-  --card: #FFFFFF;
-  --card-foreground: #000000;
-  --popover: #FFFFFF;
-  --popover-foreground: #000000;
-  --primary: #000000;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F7F7F7;
-  --secondary-foreground: #000000;
-  --muted: #F7F7F7;
-  --muted-foreground: #757575;
-  --accent: #000000;
-  --accent-foreground: #FFFFFF;
+  /* THREE SIDE design tokens — designSystem.md */
+  --brand-bg: #fafaf8;
+  --brand-surface: #f4f3ef;
+  --brand-ink: #0a0a0a;
+  --brand-muted: #7a7872;
+  --brand-ghost: #b8b5ae;
+  --brand-accent: #c9a96e;
+
+  --background: var(--brand-bg);
+  --foreground: var(--brand-ink);
+  --card: #ffffff;
+  --card-foreground: var(--brand-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-ink);
+  --primary: var(--brand-ink);
+  --primary-foreground: #ffffff;
+  --secondary: var(--brand-surface);
+  --secondary-foreground: var(--brand-ink);
+  --muted: var(--brand-surface);
+  --muted-foreground: var(--brand-muted);
+  --accent: var(--brand-ink);
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #E5E5E5;
-  --input: #E5E5E5;
-  --ring: #000000;
+  --border: var(--brand-ghost);
+  --input: var(--brand-ghost);
+  --ring: var(--brand-ink);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0;
-  --footer: #000000;
+  --footer: var(--brand-ink);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -76,9 +84,15 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-jost), 'Jost', system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), 'Montserrat', system-ui, sans-serif;
   --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-ghost: var(--brand-ghost);
+  --color-brand-accent: var(--brand-accent);
   --color-footer: var(--footer);
   --color-background: var(--background);
   --color-foreground: var(--foreground);

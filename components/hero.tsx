@@ -1,29 +1,22 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from "lucide-react"
 
 const slides = [
   {
     id: 1,
-    image: "/images/hero-beach.jpg",
+    image: "/images/hero-first-page.png",
     category: "Жіноча колекція",
-    title: "Круїзна Колекція 2026",
+    title: "NEW ERA FASHION",
     cta: "Переглянути колекцію",
-  },
-  {
-    id: 2,
-    image: "/images/hero-men.jpg",
-    category: "Чоловіча колекція",
-    title: "Весна-Літо 2026",
-    cta: "Відкрити",
   },
 ]
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -33,24 +26,20 @@ export function Hero() {
   const SLIDE_DURATION = 6000
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    if (slides.length === 1 || isPaused) return
 
-  useEffect(() => {
-    if (!isPaused) {
+    setProgress(0)
+    progressRef.current = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) return 100
+        return prev + (100 / (SLIDE_DURATION / 50))
+      })
+    }, 50)
+
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
       setProgress(0)
-      progressRef.current = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) return 100
-          return prev + (100 / (SLIDE_DURATION / 50))
-        })
-      }, 50)
-
-      intervalRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length)
-        setProgress(0)
-      }, SLIDE_DURATION)
-    }
+    }, SLIDE_DURATION)
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
@@ -74,107 +63,115 @@ export function Hero() {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Slides */}
+    <section className="relative h-screen w-full min-h-[100dvh] overflow-hidden bg-secondary">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
           }`}
+          aria-hidden={index !== currentSlide}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[6000ms] ease-out"
+            className="absolute inset-0 overflow-hidden transition-transform duration-[6000ms] ease-out"
             style={{
-              backgroundImage: `url('${slide.image}')`,
-              transform: index === currentSlide ? "scale(1.05)" : "scale(1)",
+              transform: index === currentSlide ? "scale(1.04)" : "scale(1)",
             }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              priority={index === currentSlide}
+              quality={index === currentSlide ? 95 : 80}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="absolute inset-0 bg-black/38" aria-hidden />
         </div>
       ))}
 
-      {/* Content */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-end pb-32 lg:pb-40 px-6 text-center">
-        <div
-          className={`transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <span className="tracking-[0.4em] text-[10px] lg:text-[11px] font-light uppercase text-white/80 block mb-4">
+      <div className="relative z-20 h-full flex flex-col items-center justify-end pb-44 lg:pb-56 px-6 text-center">
+        <div>
+          <span className="font-sans font-extralight tracking-[0.3em] text-[10px] lg:text-[11px] uppercase text-white/80 block mb-4">
             {slides[currentSlide].category}
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white tracking-[0.08em] uppercase">
+          <h1 className="font-serif font-light text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white tracking-[0.2em] uppercase">
             {slides[currentSlide].title}
           </h1>
         </div>
 
-        <Link
-          href="#"
-          className={`mt-10 px-10 py-4 bg-white text-foreground tracking-[0.2em] text-[11px] font-medium uppercase hover:bg-foreground hover:text-white transition-all duration-300 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-          style={{ transitionDelay: "300ms" }}
-        >
-          {slides[currentSlide].cta}
-        </Link>
-      </div>
-
-      {/* Slide Controls */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-6">
-        {/* Progress Indicators */}
-        <div className="flex items-center gap-3">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className="relative h-[2px] w-8 lg:w-12 bg-white/30 overflow-hidden"
-              aria-label={`Перейти до слайду ${index + 1}`}
-            >
-              <div
-                className="absolute inset-y-0 left-0 bg-white transition-all duration-100"
-                style={{
-                  width: index === currentSlide ? `${progress}%` : index < currentSlide ? "100%" : "0%",
-                }}
-              />
-            </button>
-          ))}
+        <div>
+          <Link
+            href="/category/all"
+            className="mt-12 inline-block px-10 py-4 border border-white/50 bg-white/95 text-foreground tracking-[0.24em] text-[11px] font-extralight uppercase rounded-none transition-all duration-700 ease-out hover:bg-foreground hover:text-background hover:border-foreground"
+          >
+            {slides[currentSlide].cta}
+          </Link>
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors"
-        aria-label="Попередній слайд"
-      >
-        <ChevronLeft className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors"
-        aria-label="Наступний слайд"
-      >
-        <ChevronRight className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
-      </button>
+      {slides.length > 1 && (
+        <>
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => goToSlide(index)}
+                  className="relative h-[2px] w-8 lg:w-12 bg-white/30 overflow-hidden rounded-none"
+                  aria-label={`Перейти до слайду ${index + 1}`}
+                >
+                  <div
+                    className="absolute inset-y-0 left-0 bg-white transition-all duration-100"
+                    style={{
+                      width: index === currentSlide ? `${progress}%` : index < currentSlide ? "100%" : "0%",
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
 
-      {/* Media Controls */}
-      <div className="absolute bottom-8 right-8 z-30 flex items-center gap-3">
-        <button
-          onClick={() => setIsPaused(!isPaused)}
-          className="p-2 text-white/70 hover:text-white transition-colors"
-          aria-label={isPaused ? "Відтворити" : "Пауза"}
-        >
-          {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-        </button>
-        <button
-          onClick={() => setIsMuted(!isMuted)}
-          className="p-2 text-white/70 hover:text-white transition-colors"
-          aria-label={isMuted ? "Увімкнути звук" : "Вимкнути звук"}
-        >
-          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={prevSlide}
+            className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors rounded-none"
+            aria-label="Попередній слайд"
+          >
+            <ChevronLeft className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
+          </button>
+          <button
+            type="button"
+            onClick={nextSlide}
+            className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 p-2 text-white/70 hover:text-white transition-colors rounded-none"
+            aria-label="Наступний слайд"
+          >
+            <ChevronRight className="w-8 h-8 lg:w-10 lg:h-10" strokeWidth={1} />
+          </button>
+
+          <div className="absolute bottom-8 right-8 z-30 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsPaused(!isPaused)}
+              className="p-2 text-white/70 hover:text-white transition-colors rounded-none"
+              aria-label={isPaused ? "Відтворити" : "Пауза"}
+            >
+              {isPaused ? <Play className="w-4 h-4" strokeWidth={1} /> : <Pause className="w-4 h-4" strokeWidth={1} />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsMuted(!isMuted)}
+              className="p-2 text-white/70 hover:text-white transition-colors rounded-none"
+              aria-label={isMuted ? "Увімкнути звук" : "Вимкнути звук"}
+            >
+              {isMuted ? <VolumeX className="w-4 h-4" strokeWidth={1} /> : <Volume2 className="w-4 h-4" strokeWidth={1} />}
+            </button>
+          </div>
+        </>
+      )}
     </section>
   )
 }

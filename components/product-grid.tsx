@@ -1,88 +1,70 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Heart } from "lucide-react"
+import { motion } from "framer-motion"
 
-interface Product {
-  id: string
+const easeLuxury = [0.25, 0.1, 0.25, 1] as const
+
+export type ProductGridItem = {
+  slug: string
   name: string
   price: string
   image: string
   isNew?: boolean
 }
 
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Lady THREE SIDE",
-    price: "185 000 грн",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop",
-    isNew: true,
-  },
-  {
-    id: "2",
-    name: "Saddle Bag",
-    price: "135 000 грн",
-    image: "https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=800&auto=format&fit=crop",
-  },
-  {
-    id: "3",
-    name: "Book Tote",
-    price: "149 000 грн",
-    image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=800&auto=format&fit=crop",
-    isNew: true,
-  },
-  {
-    id: "4",
-    name: "30 Montaigne",
-    price: "199 000 грн",
-    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800&auto=format&fit=crop",
-  },
-]
-
-function ProductCard({ product, index, isVisible }: { product: Product; index: number; isVisible: boolean }) {
+function ProductCard({ product, index }: { product: ProductGridItem; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(false)
+  const isAboveFoldRow = index < 4
 
   return (
-    <div
-      className={`group transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 8 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.7, ease: easeLuxury }}
+      className="group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href="#" className="block">
-        <div className="relative aspect-[3/4] overflow-hidden bg-[#F5F5F5]">
+      <Link href={`/product/${product.slug}`} className="block rounded-none">
+        <div className="relative aspect-[3/4] overflow-hidden bg-secondary border-[0.5px] border-brand-ghost/60">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className={`object-cover transition-transform duration-700 ${
-              isHovered ? "scale-105" : "scale-100"
+            sizes="(max-width: 1024px) 50vw, 25vw"
+            quality={85}
+            priority={isAboveFoldRow}
+            className={`object-cover transition-transform duration-1000 ease-out ${
+              isHovered ? "scale-[1.04]" : "scale-100"
             }`}
           />
-          {product.isNew && (
+          {product.isNew ? (
             <div className="absolute top-4 left-4">
-              <span className="bg-foreground text-background text-[10px] tracking-[0.15em] uppercase px-3 py-1.5">
+              <span className="bg-foreground text-background text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 font-extralight rounded-none">
                 Новинка
               </span>
             </div>
-          )}
+          ) : null}
           <button
+            type="button"
             onClick={(e) => {
               e.preventDefault()
               setIsWishlisted(!isWishlisted)
             }}
-            className={`absolute top-4 right-4 p-2 transition-all duration-300 ${
+            className={`absolute top-4 right-4 p-2 transition-opacity duration-700 rounded-none ${
               isHovered || isWishlisted ? "opacity-100" : "opacity-0"
             }`}
             aria-label="Додати до обраного"
           >
             <Heart
+              strokeWidth={1}
               className={`w-5 h-5 transition-colors ${
                 isWishlisted ? "fill-foreground text-foreground" : "text-foreground"
               }`}
@@ -90,74 +72,73 @@ function ProductCard({ product, index, isVisible }: { product: Product; index: n
           </button>
         </div>
         <div className="mt-4 text-center">
-          <h3 className="text-sm tracking-[0.1em] uppercase text-foreground">
-            {product.name}
-          </h3>
-          <p className="text-sm text-muted-foreground mt-1">
-            {product.price}
-          </p>
+          <h3 className="font-serif font-light text-sm tracking-[0.2em] uppercase text-foreground">{product.name}</h3>
+          <p className="text-sm text-muted-foreground mt-1.5 tracking-[0.04em] font-light">{product.price}</p>
         </div>
       </Link>
-    </div>
+    </motion.div>
   )
 }
 
-export function ProductGrid() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+interface ProductGridProps {
+  items: ProductGridItem[]
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
+export function ProductGrid({ items }: ProductGridProps) {
   return (
-    <section ref={sectionRef} className="py-16 lg:py-24 px-4 lg:px-8 bg-background">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.12,
+          },
+        },
+      }}
+      className="py-32 lg:py-40 px-5 lg:px-10 bg-background"
+    >
       <div className="max-w-[1600px] mx-auto">
-        <div
-          className={`text-center mb-10 lg:mb-14 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 8 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.7, ease: easeLuxury }}
+          className="text-center mb-14 lg:mb-20"
         >
-          <span className="tracking-[0.3em] text-[10px] font-light uppercase text-muted-foreground block mb-3">
+          <span className="font-sans font-extralight tracking-[0.3em] text-[10px] uppercase text-muted-foreground block mb-3">
             Обране
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-[0.1em] uppercase text-foreground">
+          <h2 className="font-serif font-light text-2xl sm:text-3xl lg:text-4xl tracking-[0.2em] uppercase text-foreground">
             Культові Сумки
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} isVisible={isVisible} />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16 lg:gap-x-10 lg:gap-y-24">
+          {items.map((product, index) => (
+            <ProductCard key={product.slug} product={product} index={index} />
           ))}
         </div>
 
-        <div
-          className={`text-center mt-10 lg:mt-14 transition-all duration-700 delay-500 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 8 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.7, ease: easeLuxury, delay: 0.12 }}
+          className="text-center mt-14 lg:mt-20"
         >
           <Link
-            href="#"
-            className="inline-block px-10 py-4 border border-foreground text-foreground tracking-[0.2em] text-[11px] font-medium uppercase hover:bg-foreground hover:text-background transition-all duration-300"
+            href="/category/bags"
+            className="inline-block px-10 py-4 border border-brand-ghost/50 bg-white/95 text-foreground tracking-[0.24em] text-[11px] font-extralight uppercase rounded-none transition-all duration-700 ease-out hover:bg-foreground hover:text-background hover:border-foreground"
           >
             Переглянути всі сумки
           </Link>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

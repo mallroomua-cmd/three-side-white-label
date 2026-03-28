@@ -1,98 +1,92 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "framer-motion"
+
+const easeLuxury = [0.25, 0.1, 0.25, 1] as const
 
 const categories = [
   {
     id: 1,
     name: "Сумки",
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    image: "/images/category-bags.png",
+    link: "/category/bags",
   },
   {
     id: 2,
     name: "Взуття",
-    image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    image: "/images/category-shoes.png",
+    link: "/category/shoes",
   },
   {
     id: 3,
     name: "Аксесуари",
-    image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    image: "/images/category-accessories.png",
+    link: "/category/accessories",
   },
   {
     id: 4,
     name: "Прикраси",
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    image: "/images/category-jewelry.png",
+    link: "/category/jewelry",
   },
 ]
 
 export function CategoryGrid() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section ref={sectionRef} className="py-16 lg:py-24 bg-background">
-      <div className="px-4 lg:px-8">
-        <div
-          className={`text-center mb-10 lg:mb-14 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: { staggerChildren: 0.12 },
+        },
+      }}
+      className="py-32 lg:py-40 bg-background"
+    >
+      <div className="px-5 lg:px-10">
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0 } }}
+          transition={{ duration: 0.7, ease: easeLuxury }}
+          className="text-center mb-14 lg:mb-20"
         >
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl tracking-[0.1em] uppercase text-foreground">
+          <h2 className="font-serif font-light text-2xl sm:text-3xl lg:text-4xl tracking-[0.2em] uppercase text-foreground">
             Категорії
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
           {categories.map((category, index) => (
-            <Link
+            <motion.div
               key={category.id}
-              href={category.link}
-              className={`group relative overflow-hidden transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.7, ease: easeLuxury, delay: index * 0.04 }}
             >
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300" />
-              </div>
-              <div className="absolute inset-0 flex items-end justify-center pb-8">
-                <span className="text-white text-sm lg:text-base tracking-[0.2em] uppercase font-light">
-                  {category.name}
-                </span>
-              </div>
-            </Link>
+              <Link href={category.link} className="group relative block overflow-hidden rounded-none">
+                <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
+                  <Image
+                    src={category.image}
+                    alt={category.name}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    quality={85}
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-black/16 group-hover:bg-black/22 transition-colors duration-700" />
+                </div>
+                <div className="absolute inset-0 flex items-end justify-center pb-10">
+                  <span className="font-sans font-extralight text-white text-sm lg:text-base tracking-[0.3em] uppercase">
+                    {category.name}
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
