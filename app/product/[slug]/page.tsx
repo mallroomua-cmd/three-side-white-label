@@ -10,6 +10,7 @@ import { ProductBreadcrumbJsonLd } from "@/components/product-breadcrumb-json-ld
 import { ProductJsonLd } from "@/components/product-json-ld"
 import { CATEGORY_META, getProductBySlug } from "@/lib/catalog"
 import { getAppUrl } from "@/lib/get-app-url"
+import { absoluteOgDefaultUrl, defaultOgImageFields } from "@/lib/og-default-meta"
 
 export const dynamicParams = true
 export const revalidate = 3600
@@ -39,19 +40,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       type: "website",
       siteName: "THREE SIDE",
       locale: "uk_UA",
-      images: [
-        {
-          url: product.image,
-          width: 1200,
-          height: 1600,
-          alt: `${product.name} — ${product.brand}`,
-        },
-      ],
+      images: defaultOgImageFields(`${product.name} — THREE SIDE`),
     },
     twitter: {
       card: "summary_large_image",
       title: `${product.name} | THREE SIDE`,
       description,
+      images: [absoluteOgDefaultUrl()],
     },
   }
 }

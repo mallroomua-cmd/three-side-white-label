@@ -9,8 +9,6 @@ import { isCatalogRouteSlug } from "@/lib/catalog-routes"
 import { getAppUrl } from "@/lib/get-app-url"
 import { absoluteOgDefaultUrl, defaultOgImageFields } from "@/lib/og-default-meta"
 
-const filterableBrands = ["Chanel", "Dior", "Louis Vuitton", "Prada", "Jacquemus", "Balenciaga"] as const
-
 export const dynamicParams = true
 export const revalidate = 3600
 
@@ -53,12 +51,10 @@ export async function generateMetadata({
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ brand?: string }>
 }
 
-export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params
-  const { brand } = await searchParams
 
   if (!isCatalogRouteSlug(slug)) {
     notFound()
@@ -69,16 +65,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     notFound()
   }
 
-  const isBrandFilterEnabled = Boolean(category.enableBrandFilter)
-  const safeSelectedBrand =
-    isBrandFilterEnabled && brand && filterableBrands.includes(brand as (typeof filterableBrands)[number])
-      ? brand
-      : undefined
-
-  let products = getProductsByCategory(slug)
-  if (safeSelectedBrand) {
-    products = products.filter((item) => item.brand === safeSelectedBrand)
-  }
+  const products = getProductsByCategory(slug)
 
   const plpProducts = products.map((p) => ({
     id: p.slug,
@@ -92,14 +79,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <CategoryLayout
-        categorySlug={slug}
-        categoryTitle={category.title}
-        categoryDescription={category.description}
-        products={plpProducts}
-        brandFilters={isBrandFilterEnabled ? [...filterableBrands] : []}
-        selectedBrand={safeSelectedBrand}
-      />
+      <CategoryLayout categoryTitle={category.title} categoryDescription={category.description} products={plpProducts} />
       <Footer />
     </main>
   )

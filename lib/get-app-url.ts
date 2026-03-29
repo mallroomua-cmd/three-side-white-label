@@ -5,7 +5,7 @@
 export function getAppUrl(): string {
   const nextRaw = (process.env.NEXT_PUBLIC_APP_URL ?? '').trim()
   const appRaw = (process.env.APP_URL ?? '').trim()
-  let candidate = nextRaw || appRaw || 'http://localhost:3000'
+  let candidate = nextRaw || appRaw || "http://localhost:3333"
   candidate = candidate.replace(/\/$/, '')
 
   if (!/^https?:\/\//i.test(candidate)) {
@@ -21,6 +21,6 @@ export function getAppUrl(): string {
     new URL(candidate)
     return candidate
   } catch {
-    return 'http://localhost:3000'
+    return "http://localhost:3333"
   }
 }

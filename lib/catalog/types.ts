@@ -17,5 +17,4 @@ export type CatalogProduct = {
 export type CategoryMeta = {
   title: string
   description: string
-  enableBrandFilter?: boolean
 }

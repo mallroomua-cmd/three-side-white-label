@@ -17,19 +17,16 @@ export const CATEGORY_META: Record<CatalogRouteSlug, CategoryMeta> = {
     title: "Сумки",
     description:
       "Легендарні форми, преміальна шкіра та деталі, що підкреслюють статус і характер.",
-    enableBrandFilter: true,
   },
   shoes: {
     title: "Взуття",
     description:
       "Безкомпромісний комфорт і архітектурна форма для динамічного міського ритму.",
-    enableBrandFilter: true,
   },
   accessories: {
     title: "Аксесуари",
     description:
       "Акценти, що завершують образ: пояси, окуляри, ремені та малі шкіряні вироби.",
-    enableBrandFilter: true,
   },
   perfume: {
     title: "Парфумерія",
@@ -45,7 +42,6 @@ export const CATEGORY_META: Record<CatalogRouteSlug, CategoryMeta> = {
     title: "Прикраси",
     description:
       "Ювелірні акценти у тонкій геометрії та класичній пропорції, натхненні couture.",
-    enableBrandFilter: true,
   },
   watches: {
     title: "Годинники",

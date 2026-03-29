@@ -5,15 +5,29 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Volume2, VolumeX, Pause, Play } from "lucide-react"
 
-const slides = [
+type HeroSlide = {
+  id: number
+  image: string
+  imageDesktop?: string
+  category: string
+  title: string
+  cta: string
+}
+
+const slides: HeroSlide[] = [
   {
     id: 1,
     image: "/images/hero-home.png",
+    imageDesktop: "/images/hero-home-desktop.jpg",
     category: "Жіноча колекція",
     title: "NEW ERA FASHION",
     cta: "Переглянути колекцію",
   },
 ]
+
+const HERO_SIZES_MOBILE = "(max-width: 1023px) 100vw, 0px"
+const HERO_SIZES_DESKTOP = "(min-width: 1024px) min(100vw, 3840px), 0px"
+const HERO_SIZES_SINGLE = "(max-width: 1023px) 100vw, min(100vw, 2560px)"
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -28,7 +42,7 @@ export function Hero() {
   useEffect(() => {
     if (slides.length === 1 || isPaused) return
 
-    setProgress(0)
+    queueMicrotask(() => setProgress(0))
     progressRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) return 100
@@ -73,20 +87,44 @@ export function Hero() {
           aria-hidden={index !== currentSlide}
         >
           <div
-            className="absolute inset-0 overflow-hidden transition-transform duration-[6000ms] ease-out"
-            style={{
-              transform: index === currentSlide ? "scale(1.04)" : "scale(1)",
-            }}
+            className={`absolute inset-0 overflow-hidden transition-transform duration-[6000ms] ease-out ${
+              index === currentSlide ? "max-lg:scale-[1.04] lg:scale-100" : "scale-100"
+            }`}
           >
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              priority={index === currentSlide}
-              quality={index === currentSlide ? 95 : 80}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
+            {slide.imageDesktop ? (
+              <>
+                <Image
+                  src={slide.image}
+                  alt=""
+                  fill
+                  priority={index === currentSlide}
+                  quality={index === currentSlide ? 95 : 80}
+                  sizes={HERO_SIZES_MOBILE}
+                  className="object-cover object-center lg:hidden"
+                  aria-hidden
+                />
+                <Image
+                  src={slide.imageDesktop}
+                  alt={slide.title}
+                  fill
+                  priority={index === currentSlide}
+                  quality={index === currentSlide ? 96 : 82}
+                  sizes={HERO_SIZES_DESKTOP}
+                  loading={index === currentSlide ? "eager" : "lazy"}
+                  className="hidden object-cover object-center lg:block"
+                />
+              </>
+            ) : (
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                priority={index === currentSlide}
+                quality={index === currentSlide ? 95 : 80}
+                sizes={HERO_SIZES_SINGLE}
+                className="object-cover object-center"
+              />
+            )}
           </div>
           <div className="absolute inset-0 bg-black/38" aria-hidden />
         </div>

@@ -98,7 +98,11 @@ export default function Home() {
 
         <StorySection
           fullWidth
-          image="/images/collection-cruise-2026.png"
+          image="/images/hero-home-desktop3.jpg"
+          fullWidthDesktopImage="/images/hero-home-desktop2.jpg"
+          fullWidthImageClassName="object-[58%_42%] max-lg:object-[58%_42%]"
+          fullWidthDesktopImageClassName="object-[50%_30%]"
+          fullWidthScrimClassName="bg-black/30"
           category="Круїзна Колекція"
           title="Жіноча Колекція 2026"
           description="Елегантність зустрічає сучасність у новій круїзній колекції. Відкрийте для себе вишукані силуети та розкішні матеріали."

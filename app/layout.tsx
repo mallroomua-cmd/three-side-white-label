@@ -15,7 +15,7 @@ function metadataBaseUrl(): URL {
   try {
     return new URL(siteUrl)
   } catch {
-    return new URL('http://localhost:3000')
+    return new URL("http://localhost:3333")
   }
 }
 

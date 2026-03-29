@@ -10,37 +10,38 @@ const footerSections: { title: string; links: FooterNavLink[] }[] = [
   {
     title: "Допомога",
     links: [
-      { label: "Часті запитання", href: "#" },
-      { label: "Доставка та повернення", href: "#" },
-      { label: "Способи оплати", href: "#" },
-      { label: "Розмірна сітка", href: "#" },
+      { label: "Часті запитання", href: "/contact" },
+      { label: "Доставка", href: "/delivery" },
+      { label: "Повернення", href: "/returns" },
+      { label: "Способи оплати", href: "/oferta" },
+      { label: "Розмірна сітка", href: "/contact" },
       { label: "Зв'язатися з нами", href: "/contact" },
     ],
   },
   {
     title: "Послуги",
     links: [
-      { label: "Персональний шопінг", href: "#" },
-      { label: "Подарункове пакування", href: "#" },
-      { label: "Догляд за виробами", href: "#" },
-      { label: "Ремонт та реставрація", href: "#" },
+      { label: "Персональний шопінг", href: "/contact" },
+      { label: "Подарункове пакування", href: "/contact" },
+      { label: "Догляд за виробами", href: "/contact" },
+      { label: "Ремонт та реставрація", href: "/contact" },
     ],
   },
   {
     title: "Про нас",
     links: [
-      { label: "Історія дому", href: "#" },
-      { label: "Сталий розвиток", href: "#" },
-      { label: "Кар'єра", href: "#" },
-      { label: "Прес-центр", href: "#" },
+      { label: "Історія дому", href: "/contact" },
+      { label: "Сталий розвиток", href: "/contact" },
+      { label: "Кар'єра", href: "/contact" },
+      { label: "Прес-центр", href: "/contact" },
     ],
   },
   {
     title: "Інформація",
     links: [
-      { label: "Умови використання", href: "#" },
-      { label: "Політика конфіденційності", href: "#" },
-      { label: "Налаштування cookie", href: "#" },
+      { label: "Публічна оферта", href: "/oferta" },
+      { label: "Політика конфіденційності", href: "/privacy" },
+      { label: "Файли cookie", href: "/cookies" },
     ],
   },
 ]

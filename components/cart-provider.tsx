@@ -61,8 +61,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
-    setLines(readCartFromStorage())
-    setHydrated(true)
+    queueMicrotask(() => {
+      setLines(readCartFromStorage())
+      setHydrated(true)
+    })
   }, [])
 
   useEffect(() => {

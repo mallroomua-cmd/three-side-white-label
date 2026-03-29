@@ -23,6 +23,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${base}/delivery`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/returns`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/oferta`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/privacy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/cookies`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.45,
+    },
   ]
 
   const categoryEntries: MetadataRoute.Sitemap = CATALOG_ROUTE_SLUGS.map((slug) => ({
