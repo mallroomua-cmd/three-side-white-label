@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import { Menu, Search, Heart, User, ShoppingBag, X, MapPin, Globe } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { motion, useReducedMotion } from "framer-motion"
 
 import { useCart } from "@/components/cart-provider"
+import { CATALOG_PRODUCTS, CATEGORY_META } from "@/lib/catalog"
 
 const mainNav = [
   { label: "Мода", href: "/category/fashion" },
@@ -26,11 +27,25 @@ function isCategoryNavActive(pathname: string, href: string): boolean {
 
 export function Header() {
   const pathname = usePathname()
+  const router = useRouter()
   const reduceMotion = useReducedMotion()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [activeResultIndex, setActiveResultIndex] = useState(-1)
+  const searchInputRef = useRef<HTMLInputElement | null>(null)
   const { totalQuantity } = useCart()
+
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    if (q.length < 2) return []
+    return CATALOG_PRODUCTS.filter((product) => {
+      const categoryTitle = CATEGORY_META[product.categorySlug]?.title ?? ""
+      const haystack = `${product.name} ${product.brand} ${product.slug} ${categoryTitle}`.toLowerCase()
+      return haystack.includes(q)
+    }).slice(0, 8)
+  }, [searchQuery])
 
   const mobileNavMotion = useMemo(
     () => ({
@@ -71,6 +86,23 @@ export function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isSearchOpen) return
+    const focusId = requestAnimationFrame(() => searchInputRef.current?.focus())
+    return () => cancelAnimationFrame(focusId)
+  }, [isSearchOpen])
+
+  const closeSearch = () => {
+    setIsSearchOpen(false)
+    setSearchQuery("")
+    setActiveResultIndex(-1)
+  }
+
+  const openProduct = (slug: string) => {
+    closeSearch()
+    router.push(`/product/${slug}`)
+  }
+
   return (
     <>
       <header
@@ -78,43 +110,6 @@ export function Header() {
           isScrolled || isMobileMenuOpen ? "bg-background" : "bg-transparent"
         }`}
       >
-        {/* Top Bar */}
-        <div className={`hidden lg:flex items-center justify-between px-6 py-2 font-sans font-extralight text-[10px] tracking-[0.3em] uppercase transition-colors border-b ${
-          isScrolled ? "border-[0.5px] border-brand-ghost/40" : "border-transparent"
-        }`}>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/contact"
-              className={`flex items-center gap-1.5 transition-colors hover:opacity-70 ${
-                isScrolled ? "text-foreground" : "text-white"
-              }`}
-            >
-              <MapPin className="w-3 h-3 shrink-0" strokeWidth={1} aria-hidden />
-              <span>Знайти бутик</span>
-            </Link>
-            <button
-              type="button"
-              className={`flex items-center gap-1.5 transition-colors hover:opacity-70 ${
-                isScrolled ? "text-foreground" : "text-white"
-              }`}
-            >
-              <Globe className="w-3 h-3 shrink-0" strokeWidth={1} aria-hidden />
-              <span>Україна</span>
-            </button>
-          </div>
-          <div className={`transition-colors ${isScrolled ? "text-foreground" : "text-white"}`}>
-            Безкоштовна доставка по всій Україні
-          </div>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/contact"
-              className={`transition-colors hover:opacity-70 ${isScrolled ? "text-foreground" : "text-white"}`}
-            >
-              {"Зв'язатися з нами"}
-            </Link>
-          </div>
-        </div>
-
         {/* Main Header — mobile: menu | logo | cart + search row */}
         <div className="lg:hidden">
           <div className="flex min-h-10 items-center justify-between gap-2 px-4 pt-3 pb-2">
@@ -331,7 +326,7 @@ export function Header() {
             <span className="font-serif font-light text-xl tracking-[0.2em] uppercase">Пошук</span>
             <button
               type="button"
-              onClick={() => setIsSearchOpen(false)}
+              onClick={closeSearch}
               className="p-1 hover:opacity-70 transition-colors"
               aria-label="Закрити пошук"
             >
@@ -344,27 +339,97 @@ export function Header() {
                 <input
                   type="text"
                   placeholder="Що ви шукаєте?"
+                  ref={searchInputRef}
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    setActiveResultIndex(-1)
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      e.preventDefault()
+                      closeSearch()
+                      return
+                    }
+                    if (searchResults.length === 0) return
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault()
+                      setActiveResultIndex((prev) => (prev + 1) % searchResults.length)
+                      return
+                    }
+                    if (e.key === "ArrowUp") {
+                      e.preventDefault()
+                      setActiveResultIndex((prev) => (prev <= 0 ? searchResults.length - 1 : prev - 1))
+                      return
+                    }
+                    if (e.key === "Enter") {
+                      e.preventDefault()
+                      const fallback = 0
+                      const targetIndex = activeResultIndex >= 0 ? activeResultIndex : fallback
+                      const target = searchResults[targetIndex]
+                      if (target) openProduct(target.slug)
+                    }
+                  }}
                   className="w-full bg-transparent border-b-2 border-foreground pb-4 text-2xl lg:text-3xl font-light tracking-wide placeholder:text-muted-foreground focus:outline-none"
                   autoFocus={isSearchOpen}
                 />
                 <Search className="absolute right-0 bottom-4 w-6 h-6 text-foreground" strokeWidth={1} aria-hidden />
               </div>
-              <div className="mt-12">
-                <h3 className="font-sans font-extralight text-[11px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
-                  Популярні запити
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {["Сумки", "Нова колекція", "Парфуми", "Подарунки", "Прикраси"].map((term) => (
-                    <button
-                      key={term}
-                      type="button"
-                      className="px-4 py-2 border-[0.5px] border-brand-ghost text-sm font-light tracking-wide rounded-none hover:bg-foreground hover:text-background transition-colors duration-700"
-                    >
-                      {term}
-                    </button>
-                  ))}
+              {searchQuery.trim().length < 2 ? (
+                <div className="mt-12">
+                  <h3 className="mb-4 font-sans font-extralight text-[11px] tracking-[0.3em] uppercase text-muted-foreground">
+                    Популярні запити
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {["Сумки", "Нова колекція", "Парфуми", "Подарунки", "Прикраси"].map((term) => (
+                      <button
+                        key={term}
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery(term)
+                          setActiveResultIndex(-1)
+                        }}
+                        className="rounded-none border-[0.5px] border-brand-ghost px-4 py-2 text-sm font-light tracking-wide transition-colors duration-700 hover:bg-foreground hover:text-background"
+                      >
+                        {term}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="mt-10 border-t border-[0.5px] border-brand-ghost/30 pt-6">
+                  <p className="mb-4 font-sans text-[10px] font-extralight uppercase tracking-[0.3em] text-muted-foreground">
+                    Знайдено: {searchResults.length}
+                  </p>
+                  {searchResults.length === 0 ? (
+                    <p className="text-sm font-light tracking-wide text-muted-foreground">Нічого не знайдено. Спробуйте інший запит.</p>
+                  ) : (
+                    <ul className="space-y-1">
+                      {searchResults.map((product, index) => {
+                        const categoryTitle = CATEGORY_META[product.categorySlug]?.title ?? "Категорія"
+                        const isActive = index === activeResultIndex
+                        return (
+                          <li key={product.slug}>
+                            <button
+                              type="button"
+                              onMouseEnter={() => setActiveResultIndex(index)}
+                              onClick={() => openProduct(product.slug)}
+                              className={`w-full rounded-none border-l border-transparent px-3 py-3 text-left transition-colors duration-500 ${
+                                isActive ? "border-l-foreground bg-secondary/70" : "hover:bg-secondary/50"
+                              }`}
+                            >
+                              <p className="font-serif text-lg font-light tracking-wide text-foreground">{product.name}</p>
+                              <p className="mt-1 font-sans text-[10px] font-extralight uppercase tracking-[0.28em] text-muted-foreground">
+                                {categoryTitle} · {product.priceLabel}
+                              </p>
+                            </button>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

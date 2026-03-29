@@ -9,7 +9,6 @@ type HeroSlide = {
   id: number
   image: string
   imageDesktop?: string
-  category: string
   title: string
   cta: string
 }
@@ -19,11 +18,25 @@ const slides: HeroSlide[] = [
     id: 1,
     image: "/images/hero-home-mobile.jpg",
     imageDesktop: "/images/hero-home-desktop.jpg",
-    category: "Жіноча колекція",
     title: "NEW ERA FASHION",
     cta: "Переглянути колекцію",
   },
 ]
+
+const CTA_ART_DIRECTION = [
+  {
+    link: "text-white/92 hover:text-white tracking-[0.2em]",
+    line: "h-px bg-white/90",
+  },
+  {
+    link: "text-white/85 hover:text-white tracking-[0.24em]",
+    line: "h-px bg-white/70",
+  },
+  {
+    link: "text-white/90 hover:text-white tracking-[0.18em]",
+    line: "h-px bg-white/100",
+  },
+] as const
 
 const HERO_SIZES_MOBILE = "(max-width: 1023px) 100vw, 0px"
 const HERO_SIZES_DESKTOP = "(min-width: 1024px) min(100vw, 3840px), 0px"
@@ -76,6 +89,8 @@ export function Hero() {
     setProgress(0)
   }
 
+  const ctaMode = CTA_ART_DIRECTION[currentSlide % CTA_ART_DIRECTION.length]
+
   return (
     <section className="relative h-screen w-full min-h-[100dvh] overflow-hidden bg-secondary">
       {slides.map((slide, index) => (
@@ -100,7 +115,7 @@ export function Hero() {
                   priority={index === currentSlide}
                   quality={index === currentSlide ? 95 : 80}
                   sizes={HERO_SIZES_MOBILE}
-                  className="object-cover object-center lg:hidden"
+                  className="object-cover object-[58%_48%] lg:hidden"
                   aria-hidden
                 />
                 <Image
@@ -111,7 +126,7 @@ export function Hero() {
                   quality={index === currentSlide ? 96 : 82}
                   sizes={HERO_SIZES_DESKTOP}
                   loading={index === currentSlide ? "eager" : "lazy"}
-                  className="hidden object-cover object-center lg:block"
+                  className="hidden object-cover object-[50%_42%] lg:block"
                 />
               </>
             ) : (
@@ -126,28 +141,21 @@ export function Hero() {
               />
             )}
           </div>
-          <div className="absolute inset-0 bg-black/38" aria-hidden />
+          <div className="absolute inset-0 bg-black/24" aria-hidden />
         </div>
       ))}
 
-      <div className="relative z-20 flex h-full flex-col items-center justify-end px-6 pb-44 text-center lg:items-start lg:justify-end lg:px-10 lg:pb-28 lg:text-left xl:px-16 xl:pb-36">
-        <div className="w-full max-w-4xl lg:max-w-3xl">
-          <span className="mb-4 block font-sans text-[10px] font-extralight uppercase tracking-[0.3em] text-white/80 lg:text-[11px]">
-            {slides[currentSlide].category}
-          </span>
-          <h1 className="font-serif text-4xl font-light uppercase tracking-[0.2em] text-white sm:text-5xl lg:text-7xl xl:text-8xl">
-            {slides[currentSlide].title}
-          </h1>
-        </div>
-
-        <div className="mt-10 w-full max-w-4xl lg:mt-12 lg:max-w-3xl">
-          <Link
-            href="/category/all"
-            className="inline-block border border-white/50 bg-white/95 px-10 py-4 font-sans text-[11px] font-extralight uppercase tracking-[0.24em] text-foreground transition-all duration-700 ease-out rounded-none hover:border-foreground hover:bg-foreground hover:text-background"
-          >
-            {slides[currentSlide].cta}
-          </Link>
-        </div>
+      <div className="relative z-20 flex h-full items-end justify-center px-6 pb-32 text-center lg:pb-24 xl:pb-28">
+        <Link
+          href="/category/all"
+          className={`group inline-flex flex-col items-center gap-2 rounded-none px-2 py-1 font-serif text-xs font-light uppercase transition-opacity duration-400 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent sm:text-sm ${ctaMode.link}`}
+        >
+          <span>{slides[currentSlide].cta.toUpperCase()}</span>
+          <span
+            aria-hidden
+            className={`w-full origin-center scale-x-0 transition-transform duration-400 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 ${ctaMode.line}`}
+          />
+        </Link>
       </div>
 
       {slides.length > 1 && (
