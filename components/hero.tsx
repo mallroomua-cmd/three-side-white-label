@@ -17,7 +17,7 @@ type HeroSlide = {
 const slides: HeroSlide[] = [
   {
     id: 1,
-    image: "/images/hero-home.png",
+    image: "/images/hero-home-mobile.jpg",
     imageDesktop: "/images/hero-home-desktop.jpg",
     category: "Жіноча колекція",
     title: "NEW ERA FASHION",

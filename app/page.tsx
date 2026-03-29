@@ -134,7 +134,9 @@ export default function Home() {
         <StorySection
           fullWidth
           image="/images/story-craftsmanship-atelier.jpg"
+          fullWidthDesktopImage="/images/story-craftsmanship-desktop.jpg"
           fullWidthImageClassName="object-[36%_50%] max-lg:object-[42%_48%]"
+          fullWidthDesktopImageClassName="object-[50%_46%]"
           fullWidthScrimClassName="bg-black/32"
           category="Майстерність"
           title="Мистецтво Досконалості"
